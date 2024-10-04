@@ -76,6 +76,24 @@ export class AuthService {
     return newUser;
   }
 
+  async validateUserByEmail(email: string, accessToken: string): Promise<any> {
+    try {
+      const decoded = this.jwtService.verify(accessToken, {
+        secret: this.configService.get<string>('JWT_SECRET'),
+      });
+
+      const user = await this.userService.findOneByEmail(email);
+
+      if (user && user.email === decoded.email) {
+        return user;
+      } else {
+        throw new Error('Invalid user or token');
+      }
+    } catch (error) {
+      throw new Error('Token validation failed');
+    }
+  }
+
   async login(user: any) {
     const payload = { username: user.username, sub: user.id };
     return {

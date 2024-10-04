@@ -42,4 +42,20 @@ export class AuthController {
       return res.status(500).json({ message: '카카오 로그인 실패' });
     }
   }
+
+  @Get('validate')
+  async validateUser(
+    @Query('email') email: string,
+    @Query('accessToken') accessToken: string,
+  ) {
+    try {
+      const user = await this.authService.validateUserByEmail(
+        email,
+        accessToken,
+      );
+      return { message: 'User validated', user };
+    } catch (error) {
+      return { message: 'Validation failed', error: error.message };
+    }
+  }
 }

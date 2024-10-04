@@ -17,14 +17,14 @@ export class PlaylistService {
   async findReceivedPlaylists(userId: number): Promise<Playlist[]> {
     return await this.playlistRepository.find({
       where: { sentTo: { id: userId } },
-      relations: ['user', 'songs'], // 보낸 사람(user)과 곡(songs)을 포함
+      relations: ['user', 'songs'],
     });
   }
 
   async findPlaylistDetails(id: number): Promise<any> {
     const playlist = await this.playlistRepository.findOne({
       where: { id },
-      relations: ['user', 'songs'], // 보낸 사람(user)과 곡(songs) 포함
+      relations: ['user', 'songs'],
     });
 
     if (!playlist) {
