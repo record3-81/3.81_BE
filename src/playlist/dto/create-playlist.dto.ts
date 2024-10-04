@@ -1,6 +1,6 @@
 // create-playlist.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber, IsArray } from 'class-validator';
+import { IsString, IsNumber, IsArray, IsOptional } from 'class-validator';
 
 export class CreatePlaylistDto {
   @ApiProperty({ description: 'The name of the playlist' })
@@ -17,4 +17,12 @@ export class CreatePlaylistDto {
   })
   @IsArray()
   songIds: number[];
+
+  @ApiProperty({
+    description: 'A message or memo for the playlist',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  message?: string;
 }

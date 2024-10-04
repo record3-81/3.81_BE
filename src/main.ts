@@ -8,10 +8,8 @@ async function bootstrap() {
 
   // Swagger 설정
   const config = new DocumentBuilder()
-    .setTitle('Music Recommendation API')
-    .setDescription(
-      'API documentation for the Music Recommendation web service',
-    )
+    .setTitle('3.81mm API')
+    .setDescription('API documentation for the 3.81mm web service')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

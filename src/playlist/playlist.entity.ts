@@ -21,7 +21,13 @@ export class Playlist {
   @ManyToOne(() => User, (user) => user.playlists)
   user: User;
 
+  @ManyToOne(() => User)
+  sentTo: User;
+
   @ManyToMany(() => Song)
   @JoinTable()
   songs: Song[];
+
+  @Column({ nullable: true })
+  message: string;
 }

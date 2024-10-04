@@ -19,6 +19,9 @@ export class Song {
   @Column()
   genre: string;
 
+  @Column()
+  spotifyUrl: string;
+
   @ManyToMany(() => Playlist, (playlist) => playlist.songs)
   playlists: Playlist[];
 }

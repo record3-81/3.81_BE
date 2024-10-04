@@ -6,7 +6,6 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { PlaylistModule } from './playlist/playlist.module';
 import { SongModule } from './song/song.module';
-import { RecommendationModule } from './recommendation/recommendation.module';
 
 @Module({
   imports: [
@@ -25,7 +24,6 @@ import { RecommendationModule } from './recommendation/recommendation.module';
     UserModule,
     PlaylistModule,
     SongModule,
-    RecommendationModule,
   ],
 })
 export class AppModule {}

@@ -1,7 +1,6 @@
 // user.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Playlist } from '../playlist/playlist.entity';
-import { Recommendation } from '../recommendation/recommendation.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
@@ -24,7 +23,4 @@ export class User {
 
   @OneToMany(() => Playlist, (playlist) => playlist.user)
   playlists: Playlist[];
-
-  @OneToMany(() => Recommendation, (recommendation) => recommendation.user)
-  recommendations: Recommendation[];
 }

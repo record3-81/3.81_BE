@@ -1,13 +1,5 @@
 // song.controller.ts
-import {
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  Body,
-  Param,
-} from '@nestjs/common';
+import { Controller, Get, Delete, Param, Query } from '@nestjs/common';
 import { SongService } from './song.service';
 import { Song } from './song.entity';
 import { CreateSongDto } from './dto/create-song.dto';
@@ -18,8 +10,11 @@ export class SongController {
   constructor(private readonly songService: SongService) {}
 
   @Get()
-  findAll(): Promise<Song[]> {
-    return this.songService.findAll();
+  findAll(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ): Promise<Song[]> {
+    return this.songService.findAll(page, limit);
   }
 
   @Get(':id')
@@ -27,17 +22,9 @@ export class SongController {
     return this.songService.findOne(id);
   }
 
-  @Post()
-  create(@Body() createSongDto: CreateSongDto): Promise<Song> {
-    return this.songService.create(createSongDto);
-  }
-
-  @Put(':id')
-  update(
-    @Param('id') id: number,
-    @Body() updateSongDto: UpdateSongDto,
-  ): Promise<Song> {
-    return this.songService.update(id, updateSongDto);
+  @Get('search')
+  searchAndSave(@Query('query') query: string): Promise<Song[]> {
+    return this.songService.search(query);
   }
 
   @Delete(':id')
